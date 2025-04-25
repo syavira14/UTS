@@ -2,40 +2,39 @@
 import java.util.ArrayList; // Struktur data untuk menyimpan antrian pasien
 import java.util.Scanner; // Untuk input dari user
 
-public class HospitalQueueSystemQuestion {
-    private static ArrayList<Patient> patientQueue = new ArrayList<>(); //patientQueue: Menyimpan daftar pasien dalam bentuk ArrayList.
+public class HospitalQueueSystemQuestion { //Mendefinisikan kelas publik bernama HospitalQueueSystemQuestion, yang merupakan kelas utama dari program.
+    private static ArrayList<Patient> patientQueue = new ArrayList<>(); //Mendeklarasikan dan menginisialisasi daftar statis untuk menyimpan objek Patient.
     private static Scanner scanner = new Scanner(System.in); //scanner: Objek untuk membaca input user secara global.
 
-    public static void main(String[] args) {
-        boolean running = true; //Loop utama program yang terus berjalan sampai user memilih exit
+    public static void main(String[] args) { //Metode utama yang dijalankan saat program dieksekusi.
+        boolean running = true; //Variabel boolean untuk mengontrol loop utama program.
 
-        System.out.println("Welcome to Hospital Queue Management System");
+        System.out.println("Welcome to Hospital Queue Management System"); //Menampilkan pesan sambutan kepada pengguna.
 
-        while (running) { //Loop while (running): Program berjalan sampai user memilih opsi 6 (Exit).
-            displayMenu();
-            int choice = getValidIntInput("Enter your choice: "); //Menampilkan menu dan memproses pilihan user
-
-            switch (choice) { //switch-case: Memproses pilihan menu user.
+        while (running) { //while (running): Memulai loop yang akan terus berjalan selama running bernilai true.
+            displayMenu(); // Memanggil metode untuk menampilkan menu pilihan.
+            int choice = getValidIntInput("Enter your choice: "); // Mengambil input pilihan dari pengguna dengan memanggil metode untuk validasi input.
+            switch (choice) { switch (choice): Memeriksa nilai choice untuk menentukan tindakan yang akan diambil.
                 case 1:
-                    addPatient();
+                    addPatient(); //memanggil metode addPatient() untuk menambahkan pasien baru.
                     break;
                 case 2:
-                    serveNextPatient();
+                    serveNextPatient(); //memanggil serveNextPatient() untuk melayani pasien berikutnya.
                     break;
                 case 3:
-                    displayQueue();
+                    displayQueue(); //memanggil displayQueue() untuk menampilkan antrean pasien saat ini.
                     break;
                 case 4:
-                    updatePriority();
+                    updatePriority(); //memanggil updatePriority() untuk memperbarui prioritas pasien.
                     break;
                 case 5:
-                    searchPatient();
+                    searchPatient(); //memanggil searchPatient() untuk mencari pasien.
                     break;
                 case 6:
-                    System.out.println("Thank you for using Hospital Queue Management System. Goodbye!");
-                    running = false;
+                    System.out.println("Thank you for using Hospital Queue Management System. Goodbye!"); //menampilkan pesan terima kasih
+                    running = false; //mengubah running menjadi false untuk keluar dari loop.
                     break;
-                default:
+                default: //Jika pilihan tidak valid, menampilkan pesan kesalahan.
                     System.out.println("Invalid choice. Please try again.");
             }
         }
@@ -54,20 +53,20 @@ public class HospitalQueueSystemQuestion {
         System.out.println("=================================");
     }
 
-    private static void addPatient() { //Meminta input nama, usia, kondisi medis, dan prioritas.
+    private static void addPatient() { // Menampilkan pesan untuk menambahkan pasien baru.
         System.out.println("\n--- Add New Patient ---");
-        String name = getValidStringInput("Enter patient name: ");
-        int age = getValidIntInRange("Enter patient age: ", 0, 120); Validasi input: Usia antara 0-120. Prioritas antara 1-5.
+        String name = getValidStringInput("Enter patient name: "); //Mengambil nama pasien dengan memanggil metode getValidStringInput.
+        int age = getValidIntInRange("Enter patient age: ", 0, 120); //Mengambil usia pasien dengan memanggil metode getValidIntInRange untuk memastikan usia dalam rentang yang valid.
         String condition = getValidStringInput("Enter patient condition: ");
-        int priority = getValidIntInRange("Enter priority (1-Critical to 5-Non-urgent): ", 1, 5);
+        int priority = getValidIntInRange("Enter priority (1-Critical to 5-Non-urgent): ", 1, 5); //Mengambil prioritas pasien dengan memanggil metode getValidIntInRange.
 
-        Patient newPatient = new Patient(name, age, condition, priority); //Membuat objek Patient baru dan menambahkannya ke patientQueue.
+        Patient newPatient = new Patient(name, age, condition, priority); //Membuat objek Patient baru dan menambahkannya ke dalam antrean pasien.
         patientQueue.add(newPatient);
-        System.out.println("Patient added successfully!");
+        System.out.println("Patient added successfully!"); //Menampilkan pesan konfirmasi bahwa pasien telah berhasil ditambahkan.
     }
 
     private static void serveNextPatient() {
-        if (patientQueue.isEmpty()) {
+        if (patientQueue.isEmpty()) { //Memeriksa apakah antrean pasien kosong dan menampilkan pesan jika tidak ada pasien.
             System.out.println("\nNo patients in the queue!");
             return;
         }
@@ -85,7 +84,7 @@ public class HospitalQueueSystemQuestion {
     }
 
     private static void displayQueue() {
-        if (patientQueue.isEmpty()) {
+        if (patientQueue.isEmpty()) { //Memeriksa apakah antrean pasien kosong dan menampilkan pesan jika tidak ada pasien.
             System.out.println("No patients in queue.");
         } else {
             System.out.println("\n--- Current Patient Queue ---");
